@@ -3,6 +3,7 @@ import commonjs from "rollup-plugin-commonjs";
 import buble from "rollup-plugin-buble";
 import { terser } from "rollup-plugin-terser";
 import svelte from "rollup-plugin-svelte";
+import babel from "rollup-plugin-babel";
 
 import pkg from "./package.json";
 
@@ -40,10 +41,13 @@ export default {
     }),
     resolve(), // so Rollup can find 3dparty modules in `node_modules`
     commonjs(), // so Rollup can convert 3dparty modules in `node_modules` to an ES module
-    buble({
-      // transpile ES2015+ to ES5
-      exclude: ["node_modules/**"]
+    babel({
+      exclude: "node_modules/**"
     })
+    // buble({
+    //   // transpile ES2015+ to ES5
+    //   exclude: ["node_modules/**"]
+    // })
     // !production && serve("dist"),
     // production && terser()
   ]
